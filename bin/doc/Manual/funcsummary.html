@@ -1,0 +1,257 @@
+<!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 4.01//EN" "http://www.w3.org/TR/html4/strict.dtd">
+
+<HTML>
+<HEAD>
+<TITLE>SWI-Prolog 5.7.15 Reference Manual: Section F.3</TITLE><LINK REL=home HREF="index.html">
+<LINK REL=contents HREF="Contents.html">
+<LINK REL=index HREF="DocIndex.html">
+<LINK REL=summary HREF="summary.html">
+<LINK REL=previous HREF="library.html">
+<LINK REL=next HREF="opsummary.html">
+<STYLE type="text/css">
+/* Style sheet for SWI-Prolog latex2html
+*/
+
+dd.defbody
+{ margin-bottom: 1em;
+}
+
+dt.pubdef
+{ background-color: #c5e1ff;
+}
+
+.bib dd
+{ margin-bottom: 1em;
+}
+
+.bib dt
+{ float: left;
+margin-right: 1.3ex;
+}
+
+pre.code
+{ margin-left: 1.5em;
+margin-right: 1.5em;
+border: 1px dotted;
+padding-top: 5px;
+padding-left: 5px;
+padding-bottom: 5px;
+background-color: #f8f8f8;
+}
+
+div.navigate
+{ text-align: center;
+background-color: #f0f0f0;
+border: 1px dotted;
+padding: 5px;
+}
+
+div.title
+{ text-align: center;
+padding-bottom: 1em;
+font-size: 200%;
+font-weight: bold;
+}
+
+div.author
+{ text-align: center;
+font-style: italic;
+}
+
+div.abstract
+{ margin-top: 2em;
+background-color: #f0f0f0;
+border: 1px dotted;
+padding: 5px;
+margin-left: 10%; margin-right:10%;
+}
+
+div.abstract-title
+{ text-align: center;
+padding: 5px;
+font-size: 120%;
+font-weight: bold;
+}
+
+div.toc-h1
+{ font-size: 200%;
+font-weight: bold;
+}
+
+div.toc-h2
+{ font-size: 120%;
+font-weight: bold;
+margin-left: 2em;
+}
+
+div.toc-h3
+{ font-size: 100%;
+font-weight: bold;
+margin-left: 4em;
+}
+
+div.toc-h4
+{ font-size: 100%;
+margin-left: 6em;
+}
+
+span.sec-nr
+{ 
+}
+
+span.sec-title
+{ 
+}
+
+span.pred-ext
+{ font-weight: bold;
+}
+
+span.pred-tag
+{ float: right;
+font-size: 80%;
+font-style: italic;
+color: #202020;
+}
+
+/* Footnotes */
+
+sup.fn { color: blue; text-decoration: underline; }
+span.fn-text { display: none; }
+sup.fn span {display: none;}
+sup:hover span 
+{ display: block !important;
+position: absolute; top: auto; left: auto; width: 80%;
+color: #000; background: white;
+border: 2px solid;
+padding: 5px; margin: 10px; z-index: 100;
+font-size: smaller;
+}
+</STYLE>
+</HEAD>
+<BODY BGCOLOR="white">
+<DIV class="navigate"><A class="nav" href="index.html"><IMG SRC="home.gif" BORDER=0 ALT="Home"></A>
+<A class="nav" href="Contents.html"><IMG SRC="index.gif" BORDER=0 ALT="Contents"></A>
+<A class="nav" href="DocIndex.html"><IMG SRC="yellow_pages.gif" BORDER=0 ALT="Index"></A>
+<A class="nav" href="summary.html"><IMG SRC="info.gif" BORDER=0 ALT="Summary"></A>
+<A class="nav" href="library.html"><IMG SRC="prev.gif" BORDER=0 ALT="Previous"></A>
+<A class="nav" href="opsummary.html"><IMG SRC="next.gif" BORDER=0 ALT="Next"></A>
+</DIV>
+
+<H2><A NAME="sec:F.3"><SPAN class="sec-nr">F.3</SPAN> <SPAN class="sec-title">Arithmetic 
+Functions</SPAN></A></H2>
+
+<A NAME="sec:funcsummary"></A>
+<TABLE>
+<TR><TD><A class="pred" href="arith.html#*/2">*/2</A></TD><TD>Multiplication</TD></TR>
+<TR><TD><A class="pred" href="arith.html#**/2">**/2</A></TD><TD>Power 
+function</TD></TR>
+<TR><TD><A class="pred" href="arith.html#+/1">+/1</A></TD><TD>Unary plus 
+(No-op)</TD></TR>
+<TR><TD><A class="pred" href="arith.html#+/2">+/2</A></TD><TD>Addition</TD></TR>
+<TR><TD><A class="pred" href="arith.html#-/1">-/1</A></TD><TD>Unary 
+minus</TD></TR>
+<TR><TD><A class="pred" href="arith.html#-/2">-/2</A></TD><TD>Subtraction</TD></TR>
+<TR><TD><A class="pred" href="arith.html#//2">//2</A></TD><TD>Division</TD></TR>
+<TR><TD><A class="pred" href="arith.html#///2">///2</A></TD><TD>Integer 
+division</TD></TR>
+<TR><TD><A class="pred" href="arith.html#/\/2">/\/2</A></TD><TD>Bitwise 
+and</TD></TR>
+<TR><TD><A class="pred" href="arith.html#<</2">&lt;&lt;/2</A></TD><TD>Bitwise 
+left shift</TD></TR>
+<TR><TD><A class="pred" href="arith.html#></2">&gt;&lt;/2</A></TD><TD>Bitwise 
+exclusive or</TD></TR>
+<TR><TD><A class="pred" href="arith.html#>>/2">&gt;&gt;/2</A></TD><TD>Bitwise 
+right shift</TD></TR>
+<TR><TD><A class="pred" href="arith.html#./2">./2</A></TD><TD>List of 
+one character: character code</TD></TR>
+<TR><TD><A class="pred" href="arith.html#\/1">\/1</A></TD><TD>Bitwise 
+negation</TD></TR>
+<TR><TD><A class="pred" href="arith.html#\//2">\//2</A></TD><TD>Bitwise 
+or</TD></TR>
+<TR><TD><A class="pred" href="arith.html#^/2">^/2</A></TD><TD>Power 
+function</TD></TR>
+<TR><TD><A class="pred" href="arith.html#abs/1">abs/1</A></TD><TD>Absolute 
+value</TD></TR>
+<TR><TD><A class="pred" href="arith.html#acos/1">acos/1</A></TD><TD>Inverse 
+(arc) cosine</TD></TR>
+<TR><TD><A class="pred" href="arith.html#asin/1">asin/1</A></TD><TD>Inverse 
+(arc) sine</TD></TR>
+<TR><TD><A class="pred" href="arith.html#atan/1">atan/1</A></TD><TD>Inverse 
+(arc) tangent</TD></TR>
+<TR><TD><A class="pred" href="arith.html#atan/2">atan/2</A></TD><TD>Rectangular 
+to polar conversion</TD></TR>
+<TR><TD><A class="pred" href="arith.html#ceil/1">ceil/1</A></TD><TD>Smallest 
+integer larger than arg</TD></TR>
+<TR><TD><A class="pred" href="arith.html#ceiling/1">ceiling/1</A></TD><TD>Smallest 
+integer larger than arg</TD></TR>
+<TR><TD><A class="pred" href="arith.html#cos/1">cos/1</A></TD><TD>Cosine</TD></TR>
+<TR><TD><A class="pred" href="arith.html#cputime/0">cputime/0</A></TD><TD>Get 
+CPU time</TD></TR>
+<TR><TD><A class="pred" href="arith.html#e/0">e/0</A></TD><TD>Mathematical 
+constant</TD></TR>
+<TR><TD><A class="pred" href="arith.html#epsilon/0">epsilon/0</A></TD><TD>Floating 
+point precision</TD></TR>
+<TR><TD><A class="pred" href="arith.html#eval/1">eval/1</A></TD><TD>Evaluate 
+term as expression</TD></TR>
+<TR><TD><A class="pred" href="arith.html#exp/1">exp/1</A></TD><TD>Exponent 
+(base <VAR>e</VAR>)</TD></TR>
+<TR><TD><A class="pred" href="typetest.html#float/1">float/1</A></TD><TD>Explicitly 
+convert to float</TD></TR>
+<TR><TD><A class="pred" href="arith.html#float_fractional_part/1">float_fractional_part/1</A></TD><TD>Fractional 
+part of a float</TD></TR>
+<TR><TD><A class="pred" href="arith.html#float_integer_part/1">float_integer_part/1</A></TD><TD>Integer 
+part of a float</TD></TR>
+<TR><TD><A class="pred" href="arith.html#floor/1">floor/1</A></TD><TD>Largest 
+integer below argument</TD></TR>
+<TR><TD><A class="pred" href="arith.html#gcd/2">gcd/2</A></TD><TD>Greatest 
+common divisor</TD></TR>
+<TR><TD><A class="pred" href="typetest.html#integer/1">integer/1</A></TD><TD>Round 
+to nearest integer</TD></TR>
+<TR><TD><A class="pred" href="arith.html#log/1">log/1</A></TD><TD>Natural 
+logarithm</TD></TR>
+<TR><TD><A class="pred" href="arith.html#log10/1">log10/1</A></TD><TD>10 
+base logarithm</TD></TR>
+<TR><TD><A class="pred" href="arith.html#lsb/1">lsb/1</A></TD><TD>Least 
+significant bit</TD></TR>
+<TR><TD><A class="pred" href="arith.html#max/2">max/2</A></TD><TD>Maximum 
+of two numbers</TD></TR>
+<TR><TD><A class="pred" href="arith.html#min/2">min/2</A></TD><TD>Minimum 
+of two numbers</TD></TR>
+<TR><TD><A class="pred" href="arith.html#msb/1">msb/1</A></TD><TD>Most 
+significant bit</TD></TR>
+<TR><TD><A class="pred" href="arith.html#mod/2">mod/2</A></TD><TD>Remainder 
+of division</TD></TR>
+<TR><TD><A class="pred" href="arith.html#powm/3">powm/3</A></TD><TD>Integer 
+exponent and modulo</TD></TR>
+<TR><TD><A class="pred" href="arith.html#random/1">random/1</A></TD><TD>Generate 
+random number</TD></TR>
+<TR><TD><A class="pred" href="arith.html#random/1">random/1</A></TD><TD>Generate 
+random number</TD></TR>
+<TR><TD><A class="pred" href="typetest.html#rational/1">rational/1</A></TD><TD>Convert 
+to rational number</TD></TR>
+<TR><TD><A class="pred" href="arith.html#rationalize/1">rationalize/1</A></TD><TD>Convert 
+to rational number</TD></TR>
+<TR><TD><A class="pred" href="arith.html#rdiv/2">rdiv/2</A></TD><TD>Ration 
+number division</TD></TR>
+<TR><TD><A class="pred" href="arith.html#rem/2">rem/2</A></TD><TD>Remainder 
+of division</TD></TR>
+<TR><TD><A class="pred" href="arith.html#round/1">round/1</A></TD><TD>Round 
+to nearest integer</TD></TR>
+<TR><TD><A class="pred" href="arith.html#truncate/1">truncate/1</A></TD><TD>Truncate 
+float to integer</TD></TR>
+<TR><TD><A class="pred" href="arith.html#pi/0">pi/0</A></TD><TD>Mathematical 
+constant</TD></TR>
+<TR><TD><A class="pred" href="arith.html#popcount/1">popcount/1</A></TD><TD>Count 
+1s in a bitvector</TD></TR>
+<TR><TD><A class="pred" href="arith.html#sign/1">sign/1</A></TD><TD>Extract 
+sign of value</TD></TR>
+<TR><TD><A class="pred" href="arith.html#sin/1">sin/1</A></TD><TD>Sine</TD></TR>
+<TR><TD><A class="pred" href="arith.html#sqrt/1">sqrt/1</A></TD><TD>Square 
+root</TD></TR>
+<TR><TD><A class="pred" href="arith.html#tan/1">tan/1</A></TD><TD>Tangent</TD></TR>
+<TR><TD><A class="pred" href="arith.html#xor/2">xor/2</A></TD><TD>Bitwise 
+exclusive or</TD></TR>
+</TABLE>
+
+<P></BODY></HTML>
