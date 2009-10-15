@@ -10,10 +10,11 @@
  ******************************************************************************/
 package net.bioclipse.blipkit.business;
 
+import java.lang.reflect.Array;
+
 import net.bioclipse.managers.business.IBioclipseManager;
 import org.apache.log4j.Logger;
 import jpl.*;
-import jpl.Query;
 
 
 public class BlipkitManager implements IBioclipseManager {
@@ -30,13 +31,14 @@ public class BlipkitManager implements IBioclipseManager {
 
     public String test() {
     	String resultString;
-
-    	Query query = new Query("consult('/home/samuel/test.pl')");
+    	resultString = "";
     	
+    	Query query = new Query("consult('/home/samuel/test.pl')");
+
         if ( !query.hasSolution() ){
-            resultString = "consult('test.pl') failed";
+        	resultString = resultString + "\nconsult('test.pl') failed";
         } else {
-        	resultString = "passed.";
+        	resultString = resultString + "\npassed.";
         }
         
     	return "Result: " + resultString;
@@ -44,6 +46,26 @@ public class BlipkitManager implements IBioclipseManager {
 
     public String printLibPath() {
     	return System.getProperty("java.library.path");
+    }
+    
+    public String getActualArgs() {
+    	String[] initArgs;
+    	if ( JPL.getActualInitArgs() != null ) {
+    		initArgs = JPL.getActualInitArgs();
+    	} else {
+    		initArgs = new String[0];
+    	}
+    	StringBuffer result = new StringBuffer("");
+    	if (initArgs.length > 0) {
+    		result.append(initArgs[0]);
+    		for (int i=1; i<initArgs.length; i++) {
+    			result.append("\n");
+    			result.append(initArgs[i]);    			
+    		}
+    	} else {
+    		result.append("Prolog engine not initialized.");
+    	}
+        return result.toString();      
     }
  
 }

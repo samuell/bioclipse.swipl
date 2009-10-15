@@ -32,5 +32,11 @@ public interface IBlipkitManager extends IBioclipseManager {
 			methodSummary="Prints the value of java.library.path"
 	)
 	public String printLibPath();
+	
+	@Recorded
+	@PublishedMethod(
+			methodSummary="Prints the arguments that the current Prolog engine was called with"
+	)
+	public String getActualArgs();
 
 }
