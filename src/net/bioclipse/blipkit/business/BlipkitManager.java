@@ -10,11 +10,21 @@
  ******************************************************************************/
 package net.bioclipse.blipkit.business;
 
-import java.lang.reflect.Array;
+import java.io.BufferedInputStream;
+import java.io.DataInputStream;
+import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileNotFoundException;
+import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
-import net.bioclipse.managers.business.IBioclipseManager;
-import org.apache.log4j.Logger;
 import jpl.*;
+import jpl.JPL;
+import jpl.Query;
+import net.bioclipse.managers.business.IBioclipseManager;
+
+import org.apache.log4j.Logger;
 
 
 public class BlipkitManager implements IBioclipseManager {
@@ -27,6 +37,23 @@ public class BlipkitManager implements IBioclipseManager {
      */
     public String getManagerName() {
         return "blipkit";
+    }
+    
+    public String init() {
+    	String result ="";
+    	String[] blipInitFile;
+
+    	blipInitFile = readFileToStringArray("/home/samuel/blipstart");
+    	for (int i=1; i<blipInitFile.length; i++) {
+    		if (blipInitFile[i] != null) {
+        		System.out.println(blipInitFile[i]);
+    		}
+    	}
+    	
+		 JPL.setDefaultInitArgs(blipInitFile);
+		 result = Boolean.toString(JPL.init());
+   	
+    	return result;
     }
 
     public String test() {
@@ -66,6 +93,41 @@ public class BlipkitManager implements IBioclipseManager {
     		result.append("Prolog engine not initialized.");
     	}
         return result.toString();      
+    }
+    
+    public static String[] readFileToStringArray(String filePath) {
+        File file = new File(filePath);
+        FileInputStream fis = null;
+        BufferedInputStream bis = null;
+        DataInputStream dis = null;
+        List<String> stringBuffer = new ArrayList<String>();
+
+        try {
+          fis = new FileInputStream(file);
+
+          // Here BufferedInputStream is added for fast reading.
+          bis = new BufferedInputStream(fis);
+          dis = new DataInputStream(bis);
+
+          // dis.available() returns 0 if the file does not have more lines.
+          int i = 0;
+          while (dis.available() != 0) {
+    		  stringBuffer.add(dis.readLine());
+          }
+
+          // dispose all the resources after using them.
+          fis.close();
+          bis.close();
+          dis.close();
+
+        } catch (FileNotFoundException e) {
+          e.printStackTrace();
+        } catch (IOException e) {
+          e.printStackTrace();
+        }
+        
+        String[] result = stringBuffer.toArray(new String[]{});
+        return result;
     }
  
 }

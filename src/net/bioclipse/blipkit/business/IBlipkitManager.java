@@ -23,6 +23,12 @@ public interface IBlipkitManager extends IBioclipseManager {
 
 	@Recorded
 	@PublishedMethod(
+			methodSummary="Initialized the prolog engine (loads blipkit modules) etc."
+	)
+	public String init();
+	
+	@Recorded
+	@PublishedMethod(
 			methodSummary="Tests the JPL Java/Prolog API"
 	)
 	public String test();
