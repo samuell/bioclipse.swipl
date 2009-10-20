@@ -10,6 +10,8 @@
  ******************************************************************************/
 package net.bioclipse.blipkit.business;
 
+import org.eclipse.core.resources.IFile;
+
 import net.bioclipse.core.PublishedClass;
 import net.bioclipse.core.PublishedMethod;
 import net.bioclipse.core.Recorded;
@@ -27,12 +29,22 @@ public interface IBlipkitManager extends IBioclipseManager {
 	)
 	public String init();
 	
+
 	@Recorded
 	@PublishedMethod(
-			methodSummary="Tests the JPL Java/Prolog API"
+			params="String filepath",
+			methodSummary="Loads a Prolog database (i.e. a Prolog file containing facts and rules)"
 	)
-	public String test();
+	public String consult(String filepath);
 
+	@Recorded
+	@PublishedMethod(
+			params="String predicate, String secondarg",
+			methodSummary="Executes a prolog query, like so: \":- [predicate](X, [secondarg]).\" and prints out all solutions"
+	)	
+    public String query2(String predicate, String secondarg);
+
+    
 	@Recorded
 	@PublishedMethod(
 			methodSummary="Prints the value of java.library.path"

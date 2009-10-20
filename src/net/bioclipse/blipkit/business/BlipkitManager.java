@@ -17,14 +17,14 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Hashtable;
 import java.util.List;
 
 import jpl.*;
-import jpl.JPL;
-import jpl.Query;
 import net.bioclipse.managers.business.IBioclipseManager;
 
 import org.apache.log4j.Logger;
+import org.eclipse.core.resources.IFile;
 
 
 public class BlipkitManager implements IBioclipseManager {
@@ -55,18 +55,35 @@ public class BlipkitManager implements IBioclipseManager {
    	
     	return result;
     }
+    
+    public String query2(String predicate, String secondarg) {
+    	String resultString ="";
+    	Variable X = new Variable("X");
+    	Query aQuery =
+    		new Query(predicate, 
+    				  new Term[] {X,new Atom(secondarg)} 
+    				  );
+    	while ( aQuery.hasMoreSolutions() ) {
+    		Hashtable solution = aQuery.nextSolution();
+    		resultString = resultString = resultString + "X = " + solution.get("X") + "\n"; 
+    		System.out.println(resultString);
+    	}
+    	return resultString;
+    }
 
-    public String test() {
+    // The filepath has to be given as a String, because Prolog can not use any of
+    // the variants created by IFile
+    public String consult(String filepath) {
     	String resultString;
     	resultString = "";
     	
-    	Query query = new Query("consult('/home/samuel/test.pl')");
+//    	System.out.println("\nfile.getFullPath().toString(): " + filepath.getFullPath().toString());
+//    	System.out.println("\nfile.getFullPath().toPortableString(): " + filepath.getFullPath().toPortableString());
+//    	System.out.println("\nfile.getFullPath().toOSString(): " + filepath.getFullPath().toOSString());
+    	
+    	Query query = new Query("consult('" + filepath + "')");
 
-        if ( !query.hasSolution() ){
-        	resultString = resultString + "\nconsult('test.pl') failed";
-        } else {
-        	resultString = resultString + "\npassed.";
-        }
+    	resultString = (query.query() ? "\nsuccess" : "\nfailed");
         
     	return "Result: " + resultString;
     }
