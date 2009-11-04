@@ -51,7 +51,23 @@ public interface IBlipkitManager extends IBioclipseManager {
     )   
     public String query(String subject, String predicate, String object);
     
-	@Recorded
+    @Recorded
+    @PublishedMethod(
+            params="String nmrshiftData",
+            methodSummary="Takes NMRShift data (as an array of arrays) and converts into a prolog query."
+    )   
+    public String nmrshiftdataToProlog(String nmrshiftData);    
+    
+    @Recorded
+    @PublishedMethod(
+            params="String rdfFile",
+            methodSummary="Invokes loading of an rdfFile into prolog and stores it in " +
+            		      "a variable (RDF_data). The loading makes use of SWI-Prolog's " +
+            		      "semweb package"
+    )   
+    public boolean loadRDFToProlog(String rdfFile);    
+
+    @Recorded
 	@PublishedMethod(
 			methodSummary="Prints the value of java.library.path"
 	)

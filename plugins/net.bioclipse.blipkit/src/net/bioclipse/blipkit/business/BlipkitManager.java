@@ -172,6 +172,21 @@ public class BlipkitManager implements IBioclipseManager {
         return query;
     }
 
+    public String nmrshiftdataToProlog(String nmrshiftData) {
+        String result = "";
+        
+        return result;
+    }
+    
+    public boolean loadRDFToProlog(String rdfFile) {
+        boolean result = false;
+        Query loadRDFQuery = new Query("load_rdf", 
+                new Term[] {    new Atom(rdfFile), 
+                                new Variable("RDF_data") });
+        result = loadRDFQuery.query();
+        return result;
+    }
+
     public String query2(String predicate, String object) {
         String resultString ="";
         Variable X = new Variable("X");
