@@ -63,37 +63,27 @@ public class BlipkitManager implements IBioclipseManager {
     	Variable X = new Variable("X");
     	Term[] plTerm = new Term[2];
     	
-    	if ( isVariable(subject) ) {
-            Variable plSubject = new Variable(subject);   
-            plTerm[0] = plSubject;
-    	} else if ( isAtom(subject) ) {
-    	    Atom plSubject = new Atom(subject);   
-            plTerm[0] = plSubject;
-    	} else if ( isInteger(subject) ) {
-            jpl.Integer plSubject = new jpl.Integer(Integer.parseInt(subject));   
-            plTerm[0] = plSubject;
-    	} else if ( isFloat(subject) ) {
-            jpl.Float plSubject = new jpl.Float(java.lang.Float.valueOf(subject.trim()));       	    
-            plTerm[0] = plSubject;
-    	} else {
-    	    System.out.println("********************\nCould not decide type of subject\n********************");
-    	}
-    	
-        if ( isVariable(object) ) {
-            Variable plObject = new Variable(object);         
-            plTerm[1] = plObject;
-        } else if ( isAtom(object) ) {
-            Atom plObject = new Atom(object);   
-            plTerm[1] = plObject;
-        } else if ( isInteger(object) ) {
-            jpl.Integer plObject = new jpl.Integer(Integer.parseInt(object));   
-            plTerm[1] = plObject;
-        } else if ( isFloat(object) ) {
-            jpl.Float plObject = new jpl.Float(java.lang.Float.valueOf(object.trim()));               
-            plTerm[1] = plObject;
-        } else {
-            System.out.println("********************\nCould not decide type of object\n********************");
-        }
+    	String[] terms = {subject, object};
+    	int i = 0;
+    	for ( String s : terms ) {
+    	    if ( isVariable(s) ) {
+    	        Variable plSubject = new Variable(s);   
+    	        plTerm[i] = plSubject;
+    	    } else if ( isAtom(s) ) {
+    	        Atom plSubject = new Atom(s);   
+    	        plTerm[i] = plSubject;
+    	    } else if ( isInteger(s) ) {
+    	        jpl.Integer plSubject = new jpl.Integer(Integer.parseInt(s));   
+    	        plTerm[i] = plSubject;
+    	    } else if ( isFloat(s) ) {
+    	        jpl.Float plSubject = new jpl.Float(java.lang.Float.valueOf(s.trim()));       	    
+    	        plTerm[i] = plSubject;
+    	    } else {
+    	        System.out.println("********************\nCould not decide type of " + s + " for the " + (i + 1) + "th item in the array\n********************");
+    	    }
+    	    i++;
+    	}    	
+
 
         Query plQuery = new Query(predicate, plTerm);
     	

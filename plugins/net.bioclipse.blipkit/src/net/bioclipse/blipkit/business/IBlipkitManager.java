@@ -46,6 +46,13 @@ public interface IBlipkitManager extends IBioclipseManager {
     
     @Recorded
     @PublishedMethod(
+            params="String subject, String predicate, String object",
+            methodSummary="Executes a prolog query, like so: \":- rdf([predicate], [subject], [object]).\" and prints out all solutions. If subject or object starts with a capital, they will be treated as variables instead as of atoms. rdf/3 is a method in the rdf_db module."
+    )   
+    public String queryRDF(String subject, String predicate, String object);       
+    
+    @Recorded
+    @PublishedMethod(
             params="String rdfFile",
             methodSummary="Invokes loading of an rdfFile into prolog and stores it in " +
             		      "a variable (RDF_data). The loading makes use of SWI-Prolog's " +
