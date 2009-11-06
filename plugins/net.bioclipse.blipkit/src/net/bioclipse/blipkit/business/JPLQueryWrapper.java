@@ -38,26 +38,28 @@ public class JPLQueryWrapper {
         }
        
         this.plQuery = new Query(prologFunction, this.plTerm);
+        this.resultString = this.resultString + "\n Result:\n";
         while ( plQuery.hasMoreSolutions() ) {
             Hashtable solution = plQuery.nextSolution();
-            this.resultString = appendQueryResultToString( prologArguments, solution, this.resultString );  
+            this.resultString = appendQueryResultToString( prologFunction, prologArguments, solution, this.resultString );  
         }
     }
     
-    public String appendQueryResultToString( String[] prologArguments, Hashtable solution, String resultString ) {
-        String newResultString = resultString + "\n";
+    public String appendQueryResultToString( String prologFunction, String[] prologArguments, Hashtable solution, String resultString ) {
+        String newResultString = resultString + prologFunction + "( ";
         int i = 0;
         for ( String currentPrologArgument : prologArguments ) {
+            if ( i > 0 ) { newResultString = newResultString + ", "; }
             if ( isVariable(currentPrologArgument) ) {
-                newResultString = newResultString + "Term " + (i + 1) + " = " + solution.get(this.plTerm[i]) + ", ";
+                newResultString = newResultString + currentPrologArgument + "=" + solution.get(currentPrologArgument);
             } else if ( isAtom(currentPrologArgument) || isInteger(currentPrologArgument) || isFloat(currentPrologArgument) ) {
-                newResultString = newResultString + currentPrologArgument + ", ";
+                newResultString = newResultString + currentPrologArgument;
             } else {
-                System.out.println("********************\nCould not decide type of " + currentPrologArgument + " for the " + (i + 1) + "th item in the array\n********************");
+                newResultString = newResultString + "[Error: Could not decide type of term, in JPLQueryWrapper.appendQueryResultToString()]";
             }
             i++;
         }
-        newResultString = newResultString + "\n";
+        newResultString = newResultString + " )\n";
         return newResultString;
     }
     

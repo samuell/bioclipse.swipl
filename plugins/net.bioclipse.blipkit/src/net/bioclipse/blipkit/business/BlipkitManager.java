@@ -58,70 +58,10 @@ public class BlipkitManager implements IBioclipseManager {
     	return result;
     }
     
-    public String query(String subject, String predicate, String object) {
-    	String resultString ="";
-    	Variable X = new Variable("X");
-    	Term[] plTerm = new Term[2];
-    	
-    	String[] terms = {subject, object};
-    	int i = 0;
-    	for ( String s : terms ) {
-    	    if ( isVariable(s) ) {
-    	        Variable plSubject = new Variable(s);   
-    	        plTerm[i] = plSubject;
-    	    } else if ( isAtom(s) ) {
-    	        Atom plSubject = new Atom(s);   
-    	        plTerm[i] = plSubject;
-    	    } else if ( isInteger(s) ) {
-    	        jpl.Integer plSubject = new jpl.Integer(Integer.parseInt(s));   
-    	        plTerm[i] = plSubject;
-    	    } else if ( isFloat(s) ) {
-    	        jpl.Float plSubject = new jpl.Float(java.lang.Float.valueOf(s.trim()));       	    
-    	        plTerm[i] = plSubject;
-    	    } else {
-    	        System.out.println("********************\nCould not decide type of " + s + " for the " + (i + 1) + "th item in the array\n********************");
-    	    }
-    	    i++;
-    	}    	
-
-
-        Query plQuery = new Query(predicate, plTerm);
-    	
-    	if ( isVariable(subject) && isVariable(object)) {
-    	    System.out.println("Case 1\n");
-            // TODO: For debugging:
-            System.out.println(plQuery.toString()); 
-            while ( plQuery.hasMoreSolutions() ) {
-                Hashtable solution = plQuery.nextSolution();
-                resultString = resultString + solution.get(subject) + " " + predicate + " " + solution.get(object) + "\n"; 
-            }
-    	} else if (!isVariable(subject) && !isVariable(object)) {
-            System.out.println("Case 2\n");
-            // TODO: For debugging:
-            System.out.println(plQuery.toString()); 
-            while ( plQuery.hasMoreSolutions() ) {
-                Hashtable solution = plQuery.nextSolution();
-                resultString = resultString + "true.\n"; 
-            }
-        } else if (isVariable(subject) && !isVariable(object)) {
-            System.out.println("Case 3\n");
-            // TODO: For debugging:
-            System.out.println(plQuery.toString()); 
-            while ( plQuery.hasMoreSolutions() ) {
-                Hashtable solution = plQuery.nextSolution();
-                resultString = resultString + solution.get(subject) + " " + predicate + " " + object + "\n"; 
-            }
-        } else if (!isVariable(subject) && isVariable(object)) {
-            System.out.println("Case 4\n");
-            // TODO: For debugging:
-            System.out.println(plQuery.toString()); 
-            while ( plQuery.hasMoreSolutions() ) {
-                Hashtable solution = plQuery.nextSolution();
-                resultString = resultString + subject + " " + predicate + " " + solution.get(object) + "\n"; 
-            }
-        } 
-        System.out.println(resultString);
-        return resultString;
+    public String queryAsPrologTriple(String subject, String predicate, String object) {
+    	String[] prologArguments = { subject, object };
+    	JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( predicate, prologArguments );
+    	return prologQueryContainer.getResultString();
     }
     
     boolean isVariable(String inputString) {
