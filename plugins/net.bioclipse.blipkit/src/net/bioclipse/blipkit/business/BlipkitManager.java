@@ -171,37 +171,16 @@ public class BlipkitManager implements IBioclipseManager {
         Query query = new Query(predicate, new Term[] {plSubject,plObject});
         return query;
     }
-
-    public String nmrshiftdataToProlog(String nmrshiftData) {
-        String result = "";
-        
-        return result;
-    }
-    
+   
     public boolean loadRDFToProlog(String rdfFile) {
         boolean result = false;
-        Query loadRDFQuery = new Query("load_rdf", 
+        Query loadRDFQuery = new Query("rdf_load", 
                 new Term[] {    new Atom(rdfFile), 
-                                new Variable("RDF_data") });
-        result = loadRDFQuery.query();
+                                new Atom("rdfDB") });
+        result = loadRDFQuery.hasSolution();
         return result;
     }
-
-    public String query2(String predicate, String object) {
-        String resultString ="";
-        Variable X = new Variable("X");
-        Query aQuery =
-            new Query(predicate, 
-                      new Term[] {X,new Atom(object)} 
-                      );
-        while ( aQuery.hasMoreSolutions() ) {
-            Hashtable solution = aQuery.nextSolution();
-            resultString = resultString = resultString + "X = " + solution.get("X") + "\n"; 
-            System.out.println(resultString);
-        }
-        return resultString;
-    }
-
+ 
     // The filepath has to be given as a String, because Prolog can not use any of
     // the variants created by IFile
     public String consult(String filepath) {

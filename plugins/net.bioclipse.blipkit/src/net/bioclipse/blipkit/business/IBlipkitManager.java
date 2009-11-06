@@ -36,27 +36,13 @@ public interface IBlipkitManager extends IBioclipseManager {
 			methodSummary="Loads a Prolog database (i.e. a Prolog file containing facts and rules)"
 	)
 	public String consult(String filepath);
-
-	@Recorded
-	@PublishedMethod(
-			params="String predicate, String object",
-			methodSummary="Executes a prolog query, like so: \":- [predicate](X, [object]).\" and prints out all solutions"
-	)	
-    public String query2(String predicate, String object);
 	
     @Recorded
     @PublishedMethod(
             params="String subject, String predicate, String object",
             methodSummary="Executes a prolog query, like so: \":- [predicate]([subject], [object]).\" and prints out all solutions. If subject or object starts with a capital, they will be treated as variables instead as of atoms."
     )   
-    public String query(String subject, String predicate, String object);
-    
-    @Recorded
-    @PublishedMethod(
-            params="String nmrshiftData",
-            methodSummary="Takes NMRShift data (as an array of arrays) and converts into a prolog query."
-    )   
-    public String nmrshiftdataToProlog(String nmrshiftData);    
+    public String query(String subject, String predicate, String object);   
     
     @Recorded
     @PublishedMethod(
