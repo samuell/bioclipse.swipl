@@ -56,17 +56,31 @@ public class BlipkitManager implements IBioclipseManager {
     	return result;
     }
     
-    public String queryAsPrologTriple(String subject, String predicate, String object) {
+    public String queryProlog1( String prologFunction, String prologArgument ) {
+        String[] prologArguments = { prologArgument };
+        JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
+        return prologQueryContainer.getResultString();
+    }
+    public String queryPrologTriple(String subject, String predicate, String object) {
     	String[] prologArguments = { subject, object };
     	JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( predicate, prologArguments );
     	return prologQueryContainer.getResultString();
     }
     
+    public String queryRDF(String subject, String predicate, String object) {
+        String[] prologArguments = { subject, predicate, object };
+        String prologRDFFunctionName = "rdf";
+        JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologRDFFunctionName, prologArguments );
+        return prologQueryContainer.getResultString();
+    }
+
     public boolean loadRDFToProlog(String rdfFile) {
         boolean result = false;
+        String resultString = "";
         Query loadRDFQuery = new Query("rdf_load", 
-                new Term[] {    new Atom(rdfFile), 
-                                new Atom("rdfDB") });
+                new Term[] { new Atom( rdfFile ) });
+        resultString = "Result of query: " + loadRDFQuery.toString() + "\n"; 
+        System.out.println("\n*********************************\n*** " + resultString + " ***\n*********************************\n");
         result = loadRDFQuery.hasSolution();
         return result;
     }

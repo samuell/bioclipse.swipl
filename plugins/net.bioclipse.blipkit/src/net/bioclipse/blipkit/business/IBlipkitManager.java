@@ -36,13 +36,20 @@ public interface IBlipkitManager extends IBioclipseManager {
 			methodSummary="Loads a Prolog database (i.e. a Prolog file containing facts and rules)"
 	)
 	public String consult(String filepath);
+
+    @Recorded
+    @PublishedMethod(
+            params="String prologFunction, String prologArgument",
+            methodSummary="Executes a prolog query, like so: \":- [prologFunction]([prologArgument])"
+    )   
+    public String queryProlog1( String prologFunction, String prologArgument );
 	
     @Recorded
     @PublishedMethod(
             params="String subject, String predicate, String object",
             methodSummary="Executes a prolog query, like so: \":- [predicate]([subject], [object]).\" and prints out all solutions. If subject or object starts with a capital, they will be treated as variables instead as of atoms."
     )   
-    public String queryAsPrologTriple(String subject, String predicate, String object);   
+    public String queryPrologTriple(String subject, String predicate, String object);   
     
     @Recorded
     @PublishedMethod(
