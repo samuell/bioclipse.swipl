@@ -17,10 +17,8 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
-import java.util.Hashtable;
 import java.util.List;
-import java.lang.Integer;
-import java.lang.Float;
+
 
 import jpl.*;
 import net.bioclipse.managers.business.IBioclipseManager;
@@ -64,44 +62,6 @@ public class BlipkitManager implements IBioclipseManager {
     	return prologQueryContainer.getResultString();
     }
     
-    boolean isVariable(String inputString) {
-        return Character.isUpperCase(inputString.trim().charAt(0));
-    }
-    boolean isAtom(String inputString) {
-        return Character.isLowerCase(inputString.trim().charAt(0));        
-    }
-    boolean isInteger(String inputString) {
-        try {
-            Integer.parseInt(inputString);
-            return true;
-        } catch (NumberFormatException nfe) {
-            return false;            
-        }
-    }
-    boolean isFloat(String inputString) {
-        try {
-            java.lang.Float.valueOf(inputString);
-            return true;
-        } catch (NumberFormatException nfe) {
-            return false;            
-        }
-    }
-    
-    Query buildQuery(String predicate, Variable plSubject, Atom plObject) {
-        Query query = new Query(predicate, new Term[] {plSubject,plObject});
-        return query;
-    }
-
-    Query buildQuery(String predicate, Atom plSubject, Variable plObject) {
-        Query query = new Query(predicate, new Term[] {plSubject,plObject});
-        return query;
-    }
-
-    Query buildQuery(String predicate, Variable plSubject, Variable plObject) {
-        Query query = new Query(predicate, new Term[] {plSubject,plObject});
-        return query;
-    }
-   
     public boolean loadRDFToProlog(String rdfFile) {
         boolean result = false;
         Query loadRDFQuery = new Query("rdf_load", 
@@ -122,9 +82,7 @@ public class BlipkitManager implements IBioclipseManager {
 //        System.out.println("\nfile.getFullPath().toOSString(): " + filepath.getFullPath().toOSString());
         
         Query query = new Query("consult('" + filepath + "')");
-
         resultString = (query.query() ? "\nsuccess" : "\nfailed");
-        
         return "Result: " + resultString;
     }
 

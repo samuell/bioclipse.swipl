@@ -38,7 +38,7 @@ public class JPLQueryWrapper {
         }
        
         this.plQuery = new Query(prologFunction, this.plTerm);
-        this.resultString = this.resultString + "\n Result:\n";
+        this.resultString = this.resultString + "\nResult:\n";
         while ( plQuery.hasMoreSolutions() ) {
             Hashtable solution = plQuery.nextSolution();
             this.resultString = appendQueryResultToString( prologFunction, prologArguments, solution, this.resultString );  
