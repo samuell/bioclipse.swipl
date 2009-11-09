@@ -39,6 +39,7 @@ public class JPLQueryWrapper {
        
         this.plQuery = new Query(prologFunction, this.plTerm);
         this.resultString = this.resultString + "\nResult:\n";
+        System.out.println("\n***************\n" + plQuery.toString() + "\n*****************\n");
         while ( plQuery.hasMoreSolutions() ) {
             Hashtable solution = plQuery.nextSolution();
             this.resultString = appendQueryResultToString( prologFunction, prologArguments, solution, this.resultString );  
@@ -67,7 +68,8 @@ public class JPLQueryWrapper {
         return Character.isUpperCase(inputString.trim().charAt(0));
     }
     boolean isAtom(String inputString) {
-        return Character.isLowerCase(inputString.trim().charAt(0));        
+        char firstChar = inputString.trim().charAt(0);
+        return (Character.isLowerCase(firstChar) || firstChar == '/' || firstChar == '\'');        
     }
     boolean isInteger(String inputString) {
         try {
