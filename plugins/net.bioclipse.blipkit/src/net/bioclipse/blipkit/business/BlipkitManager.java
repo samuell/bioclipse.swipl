@@ -61,6 +61,11 @@ public class BlipkitManager implements IBioclipseManager {
         JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
         return prologQueryContainer.getResultString();
     }
+    public String queryProlog2( String prologFunction, String prologArgument1, String prologArgument2 ) {
+        String[] prologArguments = { prologArgument1, prologArgument2 };
+        JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
+        return prologQueryContainer.getResultString();
+    }
     public String queryPrologTriple(String subject, String predicate, String object) {
     	String[] prologArguments = { subject, object };
     	JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( predicate, prologArguments );

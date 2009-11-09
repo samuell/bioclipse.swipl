@@ -46,6 +46,13 @@ public interface IBlipkitManager extends IBioclipseManager {
 	
     @Recorded
     @PublishedMethod(
+            params="String prologFunction, String prologArgument1, String prologArgument2",
+            methodSummary="Executes a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2])"
+    )   
+    public String queryProlog2( String prologFunction, String prologArgument1, String prologArgument2);
+    
+    @Recorded
+    @PublishedMethod(
             params="String subject, String predicate, String object",
             methodSummary="Executes a prolog query, like so: \":- [predicate]([subject], [object]).\" and prints out all solutions. If subject or object starts with a capital, they will be treated as variables instead as of atoms."
     )   
