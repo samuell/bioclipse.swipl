@@ -56,12 +56,12 @@ public class BlipkitManager implements IBioclipseManager {
     	return result;
     }
     
-    public String queryProlog1( String prologFunction, String prologArgument ) {
+    public String queryProlog( String prologFunction, String prologArgument ) {
         String[] prologArguments = { prologArgument };
         JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
         return prologQueryContainer.getResultString();
     }
-    public String queryProlog2( String prologFunction, String prologArgument1, String prologArgument2 ) {
+    public String queryProlog( String prologFunction, String prologArgument1, String prologArgument2 ) {
         String[] prologArguments = { prologArgument1, prologArgument2 };
         JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
         return prologQueryContainer.getResultString();

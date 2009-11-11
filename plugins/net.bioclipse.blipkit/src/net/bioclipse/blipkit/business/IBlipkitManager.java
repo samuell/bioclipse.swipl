@@ -42,14 +42,14 @@ public interface IBlipkitManager extends IBioclipseManager {
             params="String prologFunction, String prologArgument",
             methodSummary="Executes a prolog query, like so: \":- [prologFunction]([prologArgument])"
     )   
-    public String queryProlog1( String prologFunction, String prologArgument );
+    public String queryProlog( String prologFunction, String prologArgument );
 	
     @Recorded
     @PublishedMethod(
             params="String prologFunction, String prologArgument1, String prologArgument2",
             methodSummary="Executes a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2])"
     )   
-    public String queryProlog2( String prologFunction, String prologArgument1, String prologArgument2);
+    public String queryProlog( String prologFunction, String prologArgument1, String prologArgument2);
     
     @Recorded
     @PublishedMethod(
