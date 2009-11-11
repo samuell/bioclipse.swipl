@@ -22,15 +22,15 @@ public class JPLQueryWrapper {
             if ( isVariable(currentPrologArgument) ) {
                 Variable plSubject = new Variable(currentPrologArgument);   
                 this.plTerm[i] = plSubject;
-            } else if ( isAtom(currentPrologArgument) ) {
+            } else if ( isAtom(currentPrologArgument) || isFloat(currentPrologArgument) ) {
                 Atom plSubject = new Atom(currentPrologArgument);   
                 this.plTerm[i] = plSubject;
             } else if ( isInteger(currentPrologArgument) ) {
                 jpl.Integer plSubject = new jpl.Integer(Integer.parseInt(currentPrologArgument));   
                 this.plTerm[i] = plSubject;
-            } else if ( isFloat(currentPrologArgument) ) {
-                jpl.Float plSubject = new jpl.Float(java.lang.Float.valueOf(currentPrologArgument.trim()));             
-                this.plTerm[i] = plSubject;
+//            } else if ( isFloat(currentPrologArgument) ) {
+//                jpl.Float plSubject = new jpl.Float(java.lang.Float.valueOf(currentPrologArgument.trim()));             
+//                this.plTerm[i] = plSubject;
             } else {
                 System.out.println("********************\nCould not decide type of " + currentPrologArgument + " for the " + (i + 1) + "th item in the array\n********************");
             }
