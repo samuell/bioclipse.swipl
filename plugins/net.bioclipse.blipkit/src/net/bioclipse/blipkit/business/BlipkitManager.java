@@ -22,6 +22,7 @@ import java.util.List;
 
 
 import jpl.*;
+import jpl.Integer;
 import net.bioclipse.managers.business.IBioclipseManager;
 
 import org.apache.log4j.Logger;
@@ -57,53 +58,29 @@ public class BlipkitManager implements IBioclipseManager {
     	return result;
     }
     
-    public String queryProlog1( String prologFunction, String prologArgument ) {
-        String[] prologArguments = { prologArgument };
-        JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
-        return prologQueryContainer.getResultString();
-    }
-    
-    public String queryProlog2( String prologFunction, String prologArgument1, String prologArgument2 ) {
-        String[] prologArguments = { prologArgument1, prologArgument2 };
-        JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
-        return prologQueryContainer.getResultString();
-    }
-    
-    public String queryProlog3( String prologFunction, String prologArgument1, String prologArgument2, String prologArgument3 ) {
-        String[] prologArguments = { prologArgument1, prologArgument2,  prologArgument3 };
-        JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
-        return prologQueryContainer.getResultString();
-    }
-
-    public String queryProlog4( String prologFunction, String prologArgument1, String prologArgument2, String prologArgument3, String prologArgument4 ) {
-        String[] prologArguments = { prologArgument1, prologArgument2,  prologArgument3, prologArgument4 };
-        JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
-        return prologQueryContainer.getResultString();
-    }
-
-    public String queryPrologTriple(String subject, String predicate, String object) {
-    	String[] prologArguments = { subject, object };
-    	JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( predicate, prologArguments );
-    	return prologQueryContainer.getResultString();
-    }
-    
     public String queryRDF(String subject, String predicate, String object) {
         String[] prologArguments = { subject, predicate, object };
         String prologRDFFunctionName = "rdf";
-        JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologRDFFunctionName, prologArguments );
+        JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologRDFFunctionName, prologArguments, 10 );
         return prologQueryContainer.getResultString();
     }
     
     public List<List<String>> queryProlog( String[] args ) {
         String prologFunction = "";
+        int resultsLimit = 0;
         List<List<String>> table = null;
         if ( args.length > 0 ) {
             prologFunction = args[0];
         }
         if ( args.length > 1 ) {
-            String[] prologArguments = removeElementFromStringArray( args, 0 );
-            JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
-            String resultString = prologQueryContainer.getResultString();        
+            resultsLimit = java.lang.Integer.parseInt(args[1]);
+            System.out.println("***\nLIMIT = " + resultsLimit + "\n***");
+        }
+        if ( args.length > 2 ) {
+            String[] tempPrologArguments = removeElementFromStringArray( args, 0 );
+            String[] prologArguments = removeElementFromStringArray( tempPrologArguments, 0 );
+            JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments, resultsLimit );
+            table = prologQueryContainer.getResultList();        
         }
         return table;
     }

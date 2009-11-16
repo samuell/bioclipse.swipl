@@ -38,45 +38,14 @@ public interface IBlipkitManager extends IBioclipseManager {
 			methodSummary="Loads a Prolog database (i.e. a Prolog file containing facts and rules)"
 	)
 	public String consult(String filepath);
-
+    
     @Recorded
     @PublishedMethod(
-            params="String prologFunction, String prologArgument",
-            methodSummary="Executes a prolog query, like so: \":- [prologFunction]([prologArgument])"
-    )   
-    public String queryProlog1( String prologFunction, String prologArgument );
-	
-    @Recorded
-    @PublishedMethod(
-            params="String prologFunction, String prologArgument1, String prologArgument2",
-            methodSummary="Executes a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2])"
-    )   
-    public String queryProlog2( String prologFunction, String prologArgument1, String prologArgument2);
-    @Recorded
-    @PublishedMethod(
-            params="String prologFunction, String prologArgument1, String prologArgument2, String prologArgument3",
-            methodSummary="Executes a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2], [prologArgument3])"
-    )   
-    public String queryProlog3( String prologFunction, String prologArgument1, String prologArgument2, String prologArgument3);
-    @Recorded
-    @PublishedMethod(
-            params="String prologFunction, String prologArgument1, String prologArgument2, String prologArgument3, String prologArgument4",
-            methodSummary="Executes a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2], [prologArgument3], [prologArgument4])"
-    )   
-    public String queryProlog4( String prologFunction, String prologArgument1, String prologArgument2, String prologArgument3, String prologArgument4 );
-    @Recorded
-    @PublishedMethod(
-            params="String[] args",
+            params="String prologFunction String limit, String[] args",
             methodSummary="Takes an array (Important!) of strings, where the first string is the prolog function, and the rest being arguments to be passed to that function.\nIt will execute a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2], [prologArgument3], ... etc.)"
     )   
     public List<List<String>> queryProlog( String[] args );
-    @Recorded
-    @PublishedMethod(
-            params="String subject, String predicate, String object",
-            methodSummary="Executes a prolog query, like so: \":- [predicate]([subject], [object]).\" and prints out all solutions. If subject or object starts with a capital, they will be treated as variables instead as of atoms."
-    )   
-    public String queryPrologTriple(String subject, String predicate, String object);   
-    
+
     @Recorded
     @PublishedMethod(
             params="String subject, String predicate, String object",

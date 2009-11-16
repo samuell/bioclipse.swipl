@@ -1,6 +1,8 @@
 package net.bioclipse.blipkit.business;
 
+import java.util.ArrayList;
 import java.util.Hashtable;
+import java.util.List;
 
 import jpl.Atom;
 import jpl.Query;
@@ -11,9 +13,10 @@ public class JPLQueryWrapper {
     
     public Term[] plTerm;
     public Query  plQuery;
+    public List<List<String>> resultList = new ArrayList<List<String>>();
     public String resultString;
-   
-    public JPLQueryWrapper( String prologFunction, String[] prologArguments ) {
+
+    public JPLQueryWrapper( String prologFunction, String[] prologArguments, int resultsLimit ) {
         this.resultString ="";
         this.plTerm = new Term[prologArguments.length];
 
@@ -42,11 +45,14 @@ public class JPLQueryWrapper {
         }
        
         this.plQuery = new Query(prologFunction, this.plTerm);
-        this.resultString = this.resultString;
         System.out.println("\n***************\n" + plQuery.toString() + "\n*****************\n");
-        while ( plQuery.hasMoreSolutions() ) {
+        
+        int j = 0;
+        while ( plQuery.hasMoreSolutions() && ( j < resultsLimit || resultsLimit == 0 ) ) {
+            System.out.println("\nj = " + Integer.toString(j));
             Hashtable solution = plQuery.nextSolution();
-            this.resultString = appendQueryResultToString( prologFunction, prologArguments, solution, this.resultString );  
+            this.resultList.add(queryResultAsStringList( prologFunction, prologArguments, solution ));
+            j++;
         }
     }
     
@@ -67,6 +73,20 @@ public class JPLQueryWrapper {
         newResultString = newResultString + " )\n";
         return newResultString;
     }
+
+    public List<String> queryResultAsStringList( String prologFunction, String[] prologArguments, Hashtable solution ) {
+        List<String> resultStringList = new ArrayList<String>();
+        int i = 0;
+        for ( String currentPrologArgument : prologArguments ) {
+            if ( isVariable(currentPrologArgument) ) {
+                System.out.println("\nVariable (" + i + "): " + currentPrologArgument);
+                resultStringList.add(solution.get(currentPrologArgument).toString());
+            } 
+        i++;
+        }
+        return resultStringList;
+    }
+    
     
     boolean isVariable(String inputString) {
         return Character.isUpperCase(inputString.trim().charAt(0));
@@ -94,6 +114,10 @@ public class JPLQueryWrapper {
     
     public String getResultString() {
         return this.resultString;
+    }
+
+    public List<List<String>> getResultList() {
+        return this.resultList;
     }
 
 }
