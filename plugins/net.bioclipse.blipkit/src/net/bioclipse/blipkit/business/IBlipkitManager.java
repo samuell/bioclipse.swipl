@@ -10,6 +10,8 @@
  ******************************************************************************/
 package net.bioclipse.blipkit.business;
 
+import java.util.List;
+
 import org.eclipse.core.resources.IFile;
 
 import net.bioclipse.core.PublishedClass;
@@ -42,15 +44,32 @@ public interface IBlipkitManager extends IBioclipseManager {
             params="String prologFunction, String prologArgument",
             methodSummary="Executes a prolog query, like so: \":- [prologFunction]([prologArgument])"
     )   
-    public String queryProlog( String prologFunction, String prologArgument );
+    public String queryProlog1( String prologFunction, String prologArgument );
 	
     @Recorded
     @PublishedMethod(
             params="String prologFunction, String prologArgument1, String prologArgument2",
             methodSummary="Executes a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2])"
     )   
-    public String queryProlog( String prologFunction, String prologArgument1, String prologArgument2);
-    
+    public String queryProlog2( String prologFunction, String prologArgument1, String prologArgument2);
+    @Recorded
+    @PublishedMethod(
+            params="String prologFunction, String prologArgument1, String prologArgument2, String prologArgument3",
+            methodSummary="Executes a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2], [prologArgument3])"
+    )   
+    public String queryProlog3( String prologFunction, String prologArgument1, String prologArgument2, String prologArgument3);
+    @Recorded
+    @PublishedMethod(
+            params="String prologFunction, String prologArgument1, String prologArgument2, String prologArgument3, String prologArgument4",
+            methodSummary="Executes a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2], [prologArgument3], [prologArgument4])"
+    )   
+    public String queryProlog4( String prologFunction, String prologArgument1, String prologArgument2, String prologArgument3, String prologArgument4 );
+    @Recorded
+    @PublishedMethod(
+            params="String[] args",
+            methodSummary="Takes an array (Important!) of strings, where the first string is the prolog function, and the rest being arguments to be passed to that function.\nIt will execute a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2], [prologArgument3], ... etc.)"
+    )   
+    public List<List<String>> queryProlog( String[] args );
     @Recorded
     @PublishedMethod(
             params="String subject, String predicate, String object",

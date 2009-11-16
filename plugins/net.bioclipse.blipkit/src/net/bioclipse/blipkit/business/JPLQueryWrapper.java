@@ -20,17 +20,21 @@ public class JPLQueryWrapper {
         int i = 0;
         for ( String currentPrologArgument : prologArguments ) {
             if ( isVariable(currentPrologArgument) ) {
+                System.out.println("***********************************\nVariable!\n***********************************");                
                 Variable plSubject = new Variable(currentPrologArgument);   
                 this.plTerm[i] = plSubject;
-            } else if ( isAtom(currentPrologArgument) || isFloat(currentPrologArgument) ) {
-                Atom plSubject = new Atom(currentPrologArgument);   
+            } else if ( isAtom(currentPrologArgument) ) {
+                System.out.println("***********************************\nAtom!\n***********************************");
+                Atom plSubject = new Atom(currentPrologArgument.replaceAll("(\\[|\\])", ""));   
                 this.plTerm[i] = plSubject;
             } else if ( isInteger(currentPrologArgument) ) {
+                System.out.println("***********************************\nInteger!\n***********************************");
                 jpl.Integer plSubject = new jpl.Integer(Integer.parseInt(currentPrologArgument));   
                 this.plTerm[i] = plSubject;
-//            } else if ( isFloat(currentPrologArgument) ) {
-//                jpl.Float plSubject = new jpl.Float(java.lang.Float.valueOf(currentPrologArgument.trim()));             
-//                this.plTerm[i] = plSubject;
+            } else if ( isFloat(currentPrologArgument) ) {
+                System.out.println("***********************************\nFloat!\n***********************************");
+                jpl.Float plSubject = new jpl.Float(java.lang.Float.valueOf(currentPrologArgument.trim()));             
+                this.plTerm[i] = plSubject;
             } else {
                 System.out.println("********************\nCould not decide type of " + currentPrologArgument + " for the " + (i + 1) + "th item in the array\n********************");
             }
@@ -69,7 +73,7 @@ public class JPLQueryWrapper {
     }
     boolean isAtom(String inputString) {
         char firstChar = inputString.trim().charAt(0);
-        return (Character.isLowerCase(firstChar) || firstChar == '/' || firstChar == '\'');        
+        return (Character.isLowerCase(firstChar) || firstChar == '/' || firstChar == '\'' || firstChar == '[');        
     }
     boolean isInteger(String inputString) {
         try {

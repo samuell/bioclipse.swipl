@@ -17,6 +17,7 @@ import java.io.FileInputStream;
 import java.io.FileNotFoundException;
 import java.io.IOException;
 import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -56,16 +57,30 @@ public class BlipkitManager implements IBioclipseManager {
     	return result;
     }
     
-    public String queryProlog( String prologFunction, String prologArgument ) {
+    public String queryProlog1( String prologFunction, String prologArgument ) {
         String[] prologArguments = { prologArgument };
         JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
         return prologQueryContainer.getResultString();
     }
-    public String queryProlog( String prologFunction, String prologArgument1, String prologArgument2 ) {
+    
+    public String queryProlog2( String prologFunction, String prologArgument1, String prologArgument2 ) {
         String[] prologArguments = { prologArgument1, prologArgument2 };
         JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
         return prologQueryContainer.getResultString();
     }
+    
+    public String queryProlog3( String prologFunction, String prologArgument1, String prologArgument2, String prologArgument3 ) {
+        String[] prologArguments = { prologArgument1, prologArgument2,  prologArgument3 };
+        JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
+        return prologQueryContainer.getResultString();
+    }
+
+    public String queryProlog4( String prologFunction, String prologArgument1, String prologArgument2, String prologArgument3, String prologArgument4 ) {
+        String[] prologArguments = { prologArgument1, prologArgument2,  prologArgument3, prologArgument4 };
+        JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
+        return prologQueryContainer.getResultString();
+    }
+
     public String queryPrologTriple(String subject, String predicate, String object) {
     	String[] prologArguments = { subject, object };
     	JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( predicate, prologArguments );
@@ -78,7 +93,21 @@ public class BlipkitManager implements IBioclipseManager {
         JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologRDFFunctionName, prologArguments );
         return prologQueryContainer.getResultString();
     }
-
+    
+    public List<List<String>> queryProlog( String[] args ) {
+        String prologFunction = "";
+        List<List<String>> table = null;
+        if ( args.length > 0 ) {
+            prologFunction = args[0];
+        }
+        if ( args.length > 1 ) {
+            String[] prologArguments = removeElementFromStringArray( args, 0 );
+            JPLQueryWrapper prologQueryContainer = new JPLQueryWrapper( prologFunction, prologArguments );
+            String resultString = prologQueryContainer.getResultString();        
+        }
+        return table;
+    }
+    
     public boolean loadRDFToProlog(String rdfFile) {
         boolean result = false;
         String resultString = "";
@@ -128,6 +157,22 @@ public class BlipkitManager implements IBioclipseManager {
         }
         return result.toString();      
     }
+    
+    public static String[] removeElementFromStringArray(String[] input, int indexOfItemToDelete ) {
+        if (input != null) {
+                List<String> list = new ArrayList<String>(Arrays.asList(input));
+                for (int i = 0; i < list.size(); i++) {
+                        if (i == indexOfItemToDelete) {
+                                list.remove(i);
+                        }
+                }
+                return list.toArray(new String[0]);
+        } else {
+                return new String[0];
+        }
+    }
+
+
     
     public static String[] readFileToStringArray(String filePath) {
         File file = new File(filePath);
