@@ -54,6 +54,8 @@ public class JPLQueryWrapper {
             this.resultList.add(queryResultAsStringList( prologFunction, prologArguments, solution ));
             j++;
         }
+        // Maybe this (added 20091117) can help avoid stack overflow errors:
+        plQuery.close();
     }
     
     public String appendQueryResultToString( String prologFunction, String[] prologArguments, Hashtable solution, String resultString ) {

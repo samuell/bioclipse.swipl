@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <?pde version="3.5"?>
 
-<product name="Bioclipse" uid="net.bioclipse.product" id="net.bioclipse.ui.product" application="net.bioclipse.ui.application" version="2.1.1.v20091002" useFeatures="true" includeLaunchers="true">
+<product name="Bioclipse" uid=":net.bioclipse.product" id="net.bioclipse.ui.product" application="net.bioclipse.ui.application" version="2.1.1.v20091002" useFeatures="true" includeLaunchers="true">
 
    <aboutInfo>
       <image path="/net.bioclipse.ui/icons/logo/abot_img.gif"/>
@@ -15,7 +15,7 @@
 
    <launcherArgs>
       <programArgs>-consolelog -data &quot;@nodefault&quot; -noUpdate</programArgs>
-      <vmArgs>-ea  -Xmx1024M -XX:MaxPermSize=512m -Xss2048k -Djava.library.path=/usr/local/lib/pl-5.7.15/lib/i686-linux</vmArgs>
+      <vmArgs>-ea  -Xmx1024M -XX:MaxPermSize=512m -Djava.library.path=/usr/local/lib/pl-5.7.15/lib/i686-linux</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts</vmArgsMac>
    </launcherArgs>
 
@@ -50,5 +50,6 @@
       <feature id="net.bioclipse.blipkit_feature" version="2.1.1.v20091002"/>
       <feature id="net.bioclipse.rdf_feature" version="2.1.1.v20091002"/>
    </features>
+
 
 </product>
