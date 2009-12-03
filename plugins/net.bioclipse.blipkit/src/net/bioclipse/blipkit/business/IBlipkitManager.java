@@ -41,8 +41,8 @@ public interface IBlipkitManager extends IBioclipseManager {
     
     @Recorded
     @PublishedMethod(
-            params="String prologFunction String limit, String[] args",
-            methodSummary="Takes an array (Important!) of strings, where the first string is the prolog function, and the rest being arguments to be passed to that function.\nIt will execute a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2], [prologArgument3], ... etc.)"
+            params="String[] prologFunction_resultLimit_prologArguments",
+            methodSummary="Takes an array (Important!) of strings, where the first string is the prolog function, the second is a limit for the result set (If possible, keep this low to avoid unneccessary stack overflow errors), and the rest being arguments to be passed to that function.\nIt will execute a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2], [prologArgument3], ... etc.)"
     )   
     public List<List<String>> queryProlog( String[] args );
 

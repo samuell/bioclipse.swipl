@@ -95,7 +95,7 @@ public class JPLQueryWrapper {
     }
     boolean isAtom(String inputString) {
         char firstChar = inputString.trim().charAt(0);
-        return (Character.isLowerCase(firstChar) || firstChar == '/' || firstChar == '\'' || firstChar == '[');        
+        return (Character.isLowerCase(firstChar) || firstChar == '/' || firstChar == '\'' || firstChar == '{');        
     }
     boolean isInteger(String inputString) {
         try {
