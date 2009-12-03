@@ -5,6 +5,7 @@ import java.util.Hashtable;
 import java.util.List;
 
 import jpl.Atom;
+import jpl.Compound;
 import jpl.Query;
 import jpl.Term;
 import jpl.Variable;
@@ -37,7 +38,7 @@ public class JPLQueryWrapper {
             } else if ( isFloat(currentPrologArgument) ) {
                 System.out.println("***********************************\nFloat!\n***********************************");
                 jpl.Float plSubject = new jpl.Float(java.lang.Float.valueOf(currentPrologArgument.trim()));             
-                this.plTerm[i] = plSubject;
+                this.plTerm[i] = plSubject;          
             } else {
                 System.out.println("********************\nCould not decide type of " + currentPrologArgument + " for the " + (i + 1) + "th item in the array\n********************");
             }
@@ -113,6 +114,18 @@ public class JPLQueryWrapper {
             return false;            
         }
     }
+    boolean isList(String inputString) {
+        char firstChar = inputString.trim().charAt(0);
+        return ( firstChar == '[' );        
+    }
+    
+    public static Term termArrayToList(Term[] terms) {
+        Term list = new Atom("[]");
+        for (int i = terms.length - 1; i >= 0; --i) {
+            list = new Compound(".", new Term[] { terms[i], list });
+        }
+        return list;
+    } 
     
     public String getResultString() {
         return this.resultString;
