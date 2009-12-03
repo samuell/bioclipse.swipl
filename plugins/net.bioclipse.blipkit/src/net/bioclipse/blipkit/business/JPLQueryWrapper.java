@@ -39,6 +39,20 @@ public class JPLQueryWrapper {
                 System.out.println("***********************************\nFloat!\n***********************************");
                 jpl.Float plSubject = new jpl.Float(java.lang.Float.valueOf(currentPrologArgument.trim()));             
                 this.plTerm[i] = plSubject;          
+            } else if ( isList(currentPrologArgument) ) {
+                System.out.println("***********************************\nFloat!\n***********************************");
+                currentPrologArgument = currentPrologArgument.replace(" ", "").replace("[", "").replace("]", "");
+                System.out.println("currentPrologArgument: " + currentPrologArgument);
+                String[] currentPrologArguments = currentPrologArgument.split("\\,");
+                jpl.Term[] plSubjectArray = new jpl.Term[currentPrologArguments.length];             
+                int j = 0;
+                for( String currentArg : currentPrologArguments ) {
+                    jpl.Float currentArgObj = new jpl.Float( java.lang.Float.valueOf(currentArg) );
+                    plSubjectArray[j] = currentArgObj;  
+                    j++;
+                }
+                jpl.Term plSubject = termArrayToList( plSubjectArray );
+                this.plTerm[i] = plSubject;          
             } else {
                 System.out.println("********************\nCould not decide type of " + currentPrologArgument + " for the " + (i + 1) + "th item in the array\n********************");
             }
