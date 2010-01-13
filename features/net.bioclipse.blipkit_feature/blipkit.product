@@ -15,7 +15,7 @@
 
    <launcherArgs>
       <programArgs>-consolelog -data &quot;@nodefault&quot; -noUpdate</programArgs>
-      <vmArgs>-ea  -Xmx1536M -XX:MaxPermSize=1024m -Djava.library.path=/usr/local/lib/pl-5.7.15/lib/i686-linux</vmArgs>
+      <vmArgs>-ea  -Xmx1196M -XX:MaxPermSize=1024m -Djava.library.path=/usr/local/lib/pl-5.7.15/lib/i686-linux</vmArgs>
       <vmArgsMac>-XstartOnFirstThread -Dorg.eclipse.swt.internal.carbon.smallFonts -d32</vmArgsMac>
    </launcherArgs>
 

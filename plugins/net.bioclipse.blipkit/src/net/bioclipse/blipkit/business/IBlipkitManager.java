@@ -48,6 +48,13 @@ public interface IBlipkitManager extends IBioclipseManager {
 
     @Recorded
     @PublishedMethod(
+            params="String prologCode",
+            methodSummary="Loads prolog code, as stored in the prologCode variable, into the prolog engine."
+    )   
+    public String loadPrologCode( String prologCode );
+    
+    @Recorded
+    @PublishedMethod(
             params="String subject, String predicate, String object",
             methodSummary="Executes a prolog query, like so: \":- rdf([predicate], [subject], [object]).\" and prints out all solutions. If subject or object starts with a capital, they will be treated as variables instead as of atoms. rdf/3 is a method in the rdf_db module."
     )   

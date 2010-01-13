@@ -11,15 +11,16 @@
 package net.bioclipse.blipkit.business;
 
 import java.io.BufferedInputStream;
+import java.io.BufferedWriter;
 import java.io.DataInputStream;
 import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileNotFoundException;
+import java.io.FileWriter;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
-
 
 import jpl.*;
 import jpl.Integer;
@@ -27,7 +28,7 @@ import net.bioclipse.managers.business.IBioclipseManager;
 
 import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
-
+import org.eclipse.core.resources.ResourcesPlugin;
 
 public class BlipkitManager implements IBioclipseManager {
 
@@ -58,6 +59,26 @@ public class BlipkitManager implements IBioclipseManager {
     	return result;
     }
     
+    public String loadPrologCode(String prologCode) {
+        String fileWriteResultMsg = "";
+        String returnMessage = "";
+        String workspacePath = ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString();
+        String tempFileName = ".bioclipse.blipkit.loadPrologCode.tmp";
+        String tempFilePath = workspacePath + "/" + tempFileName; // TODO: Change "/" to sth OS independent!
+        try { 
+            BufferedWriter outBuffer = new BufferedWriter( new FileWriter( tempFilePath ) );
+            outBuffer.write( prologCode ); 
+            outBuffer.close(); 
+            fileWriteResultMsg = "succeeded";
+        } catch (IOException ioe) { 
+            System.out.println(ioe.getMessage());
+            fileWriteResultMsg = "failed";
+        } 
+        returnMessage = "Writing temp file: " + fileWriteResultMsg + ". tempFilePath: " + tempFilePath;
+        returnMessage += "\n Telling Prolog to consult temp file:\n" + consult(tempFilePath);
+        return returnMessage;
+    }
+
     public String queryRDF(String subject, String predicate, String object) {
         String[] prologArguments = { subject, predicate, object };
         String prologRDFFunctionName = "rdf";
