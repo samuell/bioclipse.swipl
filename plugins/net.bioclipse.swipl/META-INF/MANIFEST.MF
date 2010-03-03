@@ -1,11 +1,11 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
 Bundle-Name: Blipkit
-Bundle-SymbolicName: net.bioclipse.blipkit; singleton:=true
+Bundle-SymbolicName: net.bioclipse.swipl; singleton:=true
 Bundle-Version: 1.0.0.v0001
-Bundle-Activator: net.bioclipse.blipkit.Activator
+Bundle-Activator: net.bioclipse.swipl.Activator
 Bundle-Vendor: The Bioclipse team
-Export-Package: net.bioclipse.blipkit, net.bioclipse.blipkit.business
+Export-Package: net.bioclipse.swipl, net.bioclipse.swipl.business
 Require-Bundle: org.eclipse.ui,
  org.eclipse.core.runtime,
  net.bioclipse.core,

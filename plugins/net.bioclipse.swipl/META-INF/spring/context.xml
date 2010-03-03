@@ -8,11 +8,11 @@
 
   <osgi:service id="javaBlipkitManagerOSGI"
                 ref="javaBlipkitManager"
-                interface="net.bioclipse.blipkit.business.IJavaBlipkitManager" />
+                interface="net.bioclipse.swipl.business.IJavaBlipkitManager" />
 
   <osgi:service id="javaScriptBlipkitManagerOSGI"
                 ref="javaScriptBlipkitManager"
-                interface="net.bioclipse.blipkit.business.IJavaScriptBlipkitManager" />
+                interface="net.bioclipse.swipl.business.IJavaScriptBlipkitManager" />
 
   <osgi:reference id="recordingAdvice"
                   interface="net.bioclipse.recording.IRecordingAdvice" />
@@ -33,7 +33,7 @@
   </bean>
 
   <bean id="BlipkitManagerTarget"
-        class="net.bioclipse.blipkit.business.BlipkitManager">
+        class="net.bioclipse.swipl.business.BlipkitManager">
   </bean>
 
   <bean id="javaScriptBlipkitManager"
@@ -41,7 +41,7 @@
     <property name="target"
               ref="BlipkitManagerTarget" />
     <property name="proxyInterfaces"
-              value="net.bioclipse.blipkit.business.IJavaScriptBlipkitManager" />
+              value="net.bioclipse.swipl.business.IJavaScriptBlipkitManager" />
     <property name="interceptorNames" >
         <list>
             <value>recordingAdvisor</value>
@@ -56,7 +56,7 @@
     <property name="target"
               ref="BlipkitManagerTarget" />
     <property name="proxyInterfaces"
-              value="net.bioclipse.blipkit.business.IJavaBlipkitManager" />
+              value="net.bioclipse.swipl.business.IJavaBlipkitManager" />
     <property name="interceptorNames" >
         <list>
                 <value>recordingAdvisor</value>
