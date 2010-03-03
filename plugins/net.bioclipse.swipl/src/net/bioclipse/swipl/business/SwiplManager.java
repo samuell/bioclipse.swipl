@@ -30,9 +30,9 @@ import org.apache.log4j.Logger;
 import org.eclipse.core.resources.IFile;
 import org.eclipse.core.resources.ResourcesPlugin;
 
-public class BlipkitManager implements IBioclipseManager {
+public class SwiplManager implements IBioclipseManager {
 
-    private static final Logger logger = Logger.getLogger(BlipkitManager.class);
+    private static final Logger logger = Logger.getLogger(SwiplManager.class);
 
     /**
      * Gives a short one word name of the manager used as variable name when

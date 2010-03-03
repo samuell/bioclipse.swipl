@@ -21,9 +21,9 @@ import net.bioclipse.core.TestClasses;
 import net.bioclipse.managers.business.IBioclipseManager;
 
 @PublishedClass(
-    value="Gives access to the BLIPKIT system, which is a PROLOG based reasoner for Semantic data.	"
+    value="Gives access to the SWIPL system, which is a PROLOG based reasoner for Semantic data.	"
 )
-public interface IBlipkitManager extends IBioclipseManager {
+public interface ISwiplManager extends IBioclipseManager {
 
 	@Recorded
 	@PublishedMethod(

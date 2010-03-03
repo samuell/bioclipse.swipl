@@ -25,7 +25,7 @@ import net.bioclipse.swipl.Activator;
  *
  * @author jonalv
  */
-public class BlipkitManagerFactory
+public class SwiplManagerFactory
        implements IExecutableExtension, IExecutableExtensionFactory {
 
     private Object manager;
@@ -34,12 +34,12 @@ public class BlipkitManagerFactory
                                        String propertyName,
                                        Object data ) throws CoreException {
 
-        manager = Activator.getDefault().getJavaScriptBlipkitManager();
+        manager = Activator.getDefault().getJavaScriptSwiplManager();
 
         if ( manager == null ) {
             throw new IllegalStateException(
                           "Could not get the JavaScript flavoured " +
-                          "BlipkitManager" );
+                          "SwiplManager" );
         }
     }
 

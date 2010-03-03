@@ -5,8 +5,8 @@
    <extension
          point="net.bioclipse.scripting.contribution">
       <scriptContribution
-            service="net.bioclipse.blipkit.business.BlipkitManagerFactory"
-            id="net.bioclipse.blipkit.business.BlipkitManager">
+            service="net.bioclipse.swipl.business.SwiplManagerFactory"
+            id="net.bioclipse.swipl.business.SwiplManager">
       </scriptContribution>
    </extension>
 

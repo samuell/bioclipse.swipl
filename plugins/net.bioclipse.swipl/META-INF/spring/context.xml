@@ -6,13 +6,13 @@
        xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
                            http://www.springframework.org/schema/osgi http://www.springframework.org/schema/osgi/spring-osgi.xsd">
 
-  <osgi:service id="javaBlipkitManagerOSGI"
-                ref="javaBlipkitManager"
-                interface="net.bioclipse.swipl.business.IJavaBlipkitManager" />
+  <osgi:service id="javaSwiplManagerOSGI"
+                ref="javaSwiplManager"
+                interface="net.bioclipse.swipl.business.IJavaSwiplManager" />
 
-  <osgi:service id="javaScriptBlipkitManagerOSGI"
-                ref="javaScriptBlipkitManager"
-                interface="net.bioclipse.swipl.business.IJavaScriptBlipkitManager" />
+  <osgi:service id="javaScriptSwiplManagerOSGI"
+                ref="javaScriptSwiplManager"
+                interface="net.bioclipse.swipl.business.IJavaScriptSwiplManager" />
 
   <osgi:reference id="recordingAdvice"
                   interface="net.bioclipse.recording.IRecordingAdvice" />
@@ -32,16 +32,16 @@
         <property name="pattern" value=".*" /> <!-- See also class implementation -->
   </bean>
 
-  <bean id="BlipkitManagerTarget"
-        class="net.bioclipse.swipl.business.BlipkitManager">
+  <bean id="SwiplManagerTarget"
+        class="net.bioclipse.swipl.business.SwiplManager">
   </bean>
 
-  <bean id="javaScriptBlipkitManager"
+  <bean id="javaScriptSwiplManager"
         class="org.springframework.aop.framework.ProxyFactoryBean">
     <property name="target"
-              ref="BlipkitManagerTarget" />
+              ref="SwiplManagerTarget" />
     <property name="proxyInterfaces"
-              value="net.bioclipse.swipl.business.IJavaScriptBlipkitManager" />
+              value="net.bioclipse.swipl.business.IJavaScriptSwiplManager" />
     <property name="interceptorNames" >
         <list>
             <value>recordingAdvisor</value>
@@ -51,12 +51,12 @@
     </property>
   </bean>
 
-  <bean id="javaBlipkitManager"
+  <bean id="javaSwiplManager"
         class="org.springframework.aop.framework.ProxyFactoryBean">
     <property name="target"
-              ref="BlipkitManagerTarget" />
+              ref="SwiplManagerTarget" />
     <property name="proxyInterfaces"
-              value="net.bioclipse.swipl.business.IJavaBlipkitManager" />
+              value="net.bioclipse.swipl.business.IJavaSwiplManager" />
     <property name="interceptorNames" >
         <list>
                 <value>recordingAdvisor</value>

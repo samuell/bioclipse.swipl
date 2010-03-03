@@ -10,9 +10,9 @@
  ******************************************************************************/
 package net.bioclipse.swipl;
 
-import net.bioclipse.swipl.business.IBlipkitManager;
-import net.bioclipse.swipl.business.IJavaBlipkitManager;
-import net.bioclipse.swipl.business.IJavaScriptBlipkitManager;
+import net.bioclipse.swipl.business.ISwiplManager;
+import net.bioclipse.swipl.business.IJavaSwiplManager;
+import net.bioclipse.swipl.business.IJavaScriptSwiplManager;
 
 import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;
@@ -41,13 +41,13 @@ public class Activator extends AbstractUIPlugin {
         plugin = this;
         javaFinderTracker
             = new ServiceTracker( context,
-                                  IJavaBlipkitManager.class.getName(),
+                                  IJavaSwiplManager.class.getName(),
                                   null );
 
         javaFinderTracker.open();
         jsFinderTracker
             = new ServiceTracker( context,
-                                  IJavaScriptBlipkitManager.class.getName(),
+                                  IJavaScriptSwiplManager.class.getName(),
                                   null );
 
         jsFinderTracker.open();
@@ -67,38 +67,38 @@ public class Activator extends AbstractUIPlugin {
         return plugin;
     }
 
-    public IBlipkitManager getJavaBlipkitManager() {
-        IBlipkitManager manager = null;
+    public ISwiplManager getJavaSwiplManager() {
+        ISwiplManager manager = null;
         try {
-            manager = (IBlipkitManager)
+            manager = (ISwiplManager)
                       javaFinderTracker.waitForService(1000*10);
         }
         catch (InterruptedException e) {
             throw new IllegalStateException(
-                          "Could not get the Java BlipkitManager",
+                          "Could not get the Java SwiplManager",
                           e );
         }
         if (manager == null) {
             throw new IllegalStateException(
-                          "Could not get the Java BlipkitManager");
+                          "Could not get the Java SwiplManager");
         }
         return manager;
     }
 
-    public IJavaScriptBlipkitManager getJavaScriptBlipkitManager() {
-        IJavaScriptBlipkitManager manager = null;
+    public IJavaScriptSwiplManager getJavaScriptSwiplManager() {
+        IJavaScriptSwiplManager manager = null;
         try {
-            manager = (IJavaScriptBlipkitManager)
+            manager = (IJavaScriptSwiplManager)
                       jsFinderTracker.waitForService(1000*10);
         }
         catch (InterruptedException e) {
             throw new IllegalStateException(
-                          "Could not get the JavaScript BlipkitManager",
+                          "Could not get the JavaScript SwiplManager",
                           e );
         }
         if (manager == null) {
             throw new IllegalStateException(
-                          "Could not get the JavaScript BlipkitManager");
+                          "Could not get the JavaScript SwiplManager");
         }
         return manager;
     }

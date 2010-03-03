@@ -1,6 +1,6 @@
 Manifest-Version: 1.0
 Bundle-ManifestVersion: 2
-Bundle-Name: Blipkit
+Bundle-Name: Swipl
 Bundle-SymbolicName: net.bioclipse.swipl; singleton:=true
 Bundle-Version: 1.0.0.v0001
 Bundle-Activator: net.bioclipse.swipl.Activator
