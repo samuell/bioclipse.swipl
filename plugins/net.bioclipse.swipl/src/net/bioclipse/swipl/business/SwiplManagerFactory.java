@@ -8,14 +8,14 @@
  *
  * Contact: http://www.bioclipse.net/
  ******************************************************************************/
-package net.bioclipse.blipkit.business;
+package net.bioclipse.swipl.business;
 
 import org.eclipse.core.runtime.CoreException;
 import org.eclipse.core.runtime.IConfigurationElement;
 import org.eclipse.core.runtime.IExecutableExtension;
 import org.eclipse.core.runtime.IExecutableExtensionFactory;
 
-import net.bioclipse.blipkit.Activator;
+import net.bioclipse.swipl.Activator;
 
 /**
  * Factory used for giving the manager to extension points.

@@ -1,5 +1,5 @@
 /*******************************************************************************
- * Copyright (c) 2009  The Bioclipse team <olas@bioclipse.net>
+ta * Copyright (c) 2009  The Bioclipse team <olas@bioclipse.net>
  *
  * All rights reserved. This program and the accompanying materials
  * are made available under the terms of the Eclipse Public License v1.0
@@ -8,7 +8,7 @@
  *
  * Contact: http://www.bioclipse.net/
  ******************************************************************************/
-package net.bioclipse.blipkit.business;
+package net.bioclipse.swipl.business;
 
 import java.io.BufferedInputStream;
 import java.io.BufferedWriter;
@@ -39,7 +39,7 @@ public class BlipkitManager implements IBioclipseManager {
      * scripting.
      */
     public String getManagerName() {
-        return "blipkit";
+        return "swipl";
     }
     
     public String init() {
@@ -63,12 +63,12 @@ public class BlipkitManager implements IBioclipseManager {
         String fileWriteResultMsg = "";
         String returnMessage = "";
         String workspacePath = ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString();
-        String tempFileName = ".bioclipse.blipkit.loadPrologCode.tmp";
+        String tempFileName = ".bioclipse.swipl.loadPrologCode.tmp";
         String tempFilePath = workspacePath + "/" + tempFileName; // TODO: Change "/" to sth OS independent!
         try { 
             BufferedWriter outBuffer = new BufferedWriter( new FileWriter( tempFilePath ) );
             outBuffer.write( prologCode ); 
-            outBuffer.close(); 
+            outBuffer.close();
             fileWriteResultMsg = "succeeded";
         } catch (IOException ioe) { 
             System.out.println(ioe.getMessage());
@@ -76,6 +76,7 @@ public class BlipkitManager implements IBioclipseManager {
         } 
         returnMessage = "Writing temp file: " + fileWriteResultMsg + ". tempFilePath: " + tempFilePath;
         returnMessage += "\n Telling Prolog to consult temp file:\n" + consult(tempFilePath);
+                
         return returnMessage;
     }
 

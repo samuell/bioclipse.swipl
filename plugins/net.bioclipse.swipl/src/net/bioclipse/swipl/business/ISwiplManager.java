@@ -8,7 +8,7 @@
  *
  * Contact: http://www.bioclipse.net/
  ******************************************************************************/
-package net.bioclipse.blipkit.business;
+package net.bioclipse.swipl.business;
 
 import java.util.List;
 
@@ -27,7 +27,7 @@ public interface IBlipkitManager extends IBioclipseManager {
 
 	@Recorded
 	@PublishedMethod(
-			methodSummary="Initialized the prolog engine (loads blipkit modules) etc."
+			methodSummary="Initialized the prolog engine (loads swipl modules) etc."
 	)
 	public String init();
 	

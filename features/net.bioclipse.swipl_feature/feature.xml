@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <feature
-      id="net.bioclipse.blipkit_feature"
-      label="blipkit Feature"
+      id="net.bioclipse.swipl_feature"
+      label="swipl Feature"
       version="2.1.1.v20091002"
       provider-name="Bioclipse Team"
-      plugin="net.bioclipse.blipkit">
+      plugin="net.bioclipse.swipl">
 
    <description>
-      blipkit support for Bioclipse.
+      swipl support for Bioclipse.
    </description>
 
    <copyright>
@@ -26,7 +26,7 @@ Eclipse Public License.
    </requires>
 
    <plugin
-         id="net.bioclipse.blipkit"
+         id="net.bioclipse.swipl"
          download-size="0"
          install-size="0"
          version="0.0.0"

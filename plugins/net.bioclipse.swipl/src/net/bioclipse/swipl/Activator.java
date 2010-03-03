@@ -8,11 +8,11 @@
  *
  * Contact: http://www.bioclipse.net/
  ******************************************************************************/
-package net.bioclipse.blipkit;
+package net.bioclipse.swipl;
 
-import net.bioclipse.blipkit.business.IBlipkitManager;
-import net.bioclipse.blipkit.business.IJavaBlipkitManager;
-import net.bioclipse.blipkit.business.IJavaScriptBlipkitManager;
+import net.bioclipse.swipl.business.IBlipkitManager;
+import net.bioclipse.swipl.business.IJavaBlipkitManager;
+import net.bioclipse.swipl.business.IJavaScriptBlipkitManager;
 
 import org.apache.log4j.Logger;
 import org.eclipse.ui.plugin.AbstractUIPlugin;

@@ -1,4 +1,4 @@
-package net.bioclipse.blipkit.business;
+package net.bioclipse.swipl.business;
 
 import java.util.ArrayList;
 import java.util.Hashtable;

@@ -8,11 +8,8 @@
  *
  * Contact: Bioclipse Project <http://www.bioclipse.net>
  ******************************************************************************/
-package net.bioclipse.blipkit.business;
+package net.bioclipse.swipl.business;
 
-import net.bioclipse.managers.business.IBioclipseJSManager;
-
-public interface IJavaScriptBlipkitManager
-       extends IBlipkitManager, IBioclipseJSManager {
+public interface IJavaBlipkitManager extends IBlipkitManager {
 
 }
