@@ -74,7 +74,7 @@ public class SwiplManager implements IBioclipseManager {
             fileWriteResultMsg = "failed";
         } 
         returnMessage = "Writing temp file: " + fileWriteResultMsg + ". tempFilePath: " + tempFilePath;
-        returnMessage += "\n Telling Prolog to consult temp file:\n" + consult(tempFilePath);
+        returnMessage += "\n Telling Prolog to consult temp file:\n" + consult(tempFileName);
                 
         return returnMessage;
     }
