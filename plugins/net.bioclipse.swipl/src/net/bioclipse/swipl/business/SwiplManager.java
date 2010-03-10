@@ -62,9 +62,8 @@ public class SwiplManager implements IBioclipseManager {
     public String loadPrologCode(String prologCode) {
         String fileWriteResultMsg = "";
         String returnMessage = "";
-        String workspacePath = ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString();
         String tempFileName = ".bioclipse.swipl.loadPrologCode.tmp";
-        String tempFilePath = workspacePath + "/" + tempFileName; // TODO: Change "/" to sth OS independent!
+        String tempFilePath = getWorkspacePath() + tempFileName; 
         try { 
             BufferedWriter outBuffer = new BufferedWriter( new FileWriter( tempFilePath ) );
             outBuffer.write( prologCode ); 
@@ -110,8 +109,9 @@ public class SwiplManager implements IBioclipseManager {
     public boolean loadRDFToProlog(String rdfFile) {
         boolean result = false;
         String resultString = "";
+        String rdfFilePath = getWorkspacePath() + rdfFile;
         Query loadRDFQuery = new Query("rdf_load", 
-                new Term[] { new Atom( rdfFile ) });
+                new Term[] { new Atom( rdfFilePath ) });
         resultString = "Result of query: " + loadRDFQuery.toString() + "\n"; 
         System.out.println("\n*********************************\n" + resultString + "\n*********************************\n");
         result = loadRDFQuery.hasSolution();
@@ -120,15 +120,16 @@ public class SwiplManager implements IBioclipseManager {
  
     // The filepath has to be given as a String, because Prolog can not use any of
     // the variants created by IFile
-    public String consult(String filepath) {
+    public String consult(String filePath) {
         String resultString;
+        String fullFilePath = getWorkspacePath() + filePath;
         resultString = "";
         
 //        System.out.println("\nfile.getFullPath().toString(): " + filepath.getFullPath().toString());
 //        System.out.println("\nfile.getFullPath().toPortableString(): " + filepath.getFullPath().toPortableString());
 //        System.out.println("\nfile.getFullPath().toOSString(): " + filepath.getFullPath().toOSString());
         
-        Query query = new Query("consult('" + filepath + "')");
+        Query query = new Query("consult('" + fullFilePath + "')");
         resultString = (query.query() ? "\nsuccess" : "\nfailed");
         return "Result: " + resultString;
     }
@@ -155,6 +156,10 @@ public class SwiplManager implements IBioclipseManager {
             result.append("Prolog engine not initialized.");
         }
         return result.toString();      
+    }
+    
+    public static String getWorkspacePath() {
+        return ResourcesPlugin.getWorkspace().getRoot().getLocation().toOSString() + "/"; // TODO: Change "/" to sth OS independent!
     }
     
     public static String[] removeElementFromStringArray(String[] input, int indexOfItemToDelete ) {
