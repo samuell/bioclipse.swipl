@@ -42,7 +42,7 @@ public interface ISwiplManager extends IBioclipseManager {
     @Recorded
     @PublishedMethod(
             params="String[] prologFunction_resultLimit_prologArguments",
-            methodSummary="Takes an array (Important!) of strings, where the first string is the prolog function, the second is a limit for the result set (If possible, keep this low to avoid unneccessary stack overflow errors), and the rest being arguments to be passed to that function.\nIt will execute a prolog query, like so: \":- [prologFunction]([prologArgument1], [prologArgument2], [prologArgument3], ... etc.)"
+            methodSummary="\nTakes an array of strings; 1: The prolog function, 2: Max no. of results, and the rest being arguments passed to the specified prolog function.\n\nExample:\n swipl.queryProlog( [\"prologFunction\",\"10\",\"anAtom\",\"AVariable\"] );\n\nThat will execute a prolog query, like so: \n:- prologFunction(anAtom, AVariable)\n\n...and return 10 results, as unified with the AVariable."
     )   
     public List<List<String>> queryProlog( String[] args );
 

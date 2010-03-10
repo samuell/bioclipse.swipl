@@ -113,7 +113,7 @@ public class SwiplManager implements IBioclipseManager {
         Query loadRDFQuery = new Query("rdf_load", 
                 new Term[] { new Atom( rdfFile ) });
         resultString = "Result of query: " + loadRDFQuery.toString() + "\n"; 
-        System.out.println("\n*********************************\n*** " + resultString + " ***\n*********************************\n");
+        System.out.println("\n*********************************\n" + resultString + "\n*********************************\n");
         result = loadRDFQuery.hasSolution();
         return result;
     }
