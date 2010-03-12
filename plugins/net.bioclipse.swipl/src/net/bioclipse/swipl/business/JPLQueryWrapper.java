@@ -29,7 +29,9 @@ public class JPLQueryWrapper {
                 this.plTerm[i] = plSubject;
             } else if ( isAtom(currentPrologArgument) ) {
                 System.out.println("***********************************\nAtom!\n***********************************");
-                Atom plSubject = new Atom(currentPrologArgument.replaceAll("(\\[|\\])", ""));   
+                currentPrologArgument = currentPrologArgument.replaceAll("(\\[|\\])", "");
+                currentPrologArgument = currentPrologArgument.replaceAll("\\\'", "");                
+                Atom plSubject = new Atom(currentPrologArgument);   
                 this.plTerm[i] = plSubject;
             } else if ( isInteger(currentPrologArgument) ) {
                 System.out.println("***********************************\nInteger!\n***********************************");
