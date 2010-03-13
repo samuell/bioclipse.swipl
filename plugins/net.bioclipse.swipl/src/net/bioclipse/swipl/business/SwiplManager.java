@@ -74,7 +74,7 @@ public class SwiplManager implements IBioclipseManager {
             fileWriteResultMsg = "failed";
         } 
         returnMessage = "Writing temp file: " + fileWriteResultMsg + ". tempFilePath: " + tempFilePath;
-        returnMessage += "\n Telling Prolog to consult temp file:\n" + consult(tempFileName);
+        returnMessage += "\n Telling Prolog to consult temp file:\n" + loadPrologFile(tempFileName);
                 
         return returnMessage;
     }
@@ -120,7 +120,7 @@ public class SwiplManager implements IBioclipseManager {
  
     // The filepath has to be given as a String, because Prolog can not use any of
     // the variants created by IFile
-    public String consult(String filePath) {
+    public String loadPrologFile(String filePath) {
         String resultString;
         String fullFilePath = getWorkspacePath() + filePath;
         resultString = "";

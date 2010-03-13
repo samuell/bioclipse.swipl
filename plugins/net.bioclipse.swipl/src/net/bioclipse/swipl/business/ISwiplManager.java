@@ -35,9 +35,9 @@ public interface ISwiplManager extends IBioclipseManager {
 	@Recorded
 	@PublishedMethod(
 			params="String filepath",
-			methodSummary="Loads a Prolog database (i.e. a Prolog file containing facts and rules)"
+			methodSummary="Loads a file with Prolog code"
 	)
-	public String consult(String filepath);
+	public String loadPrologFile(String filepath);
     
     @Recorded
     @PublishedMethod(
